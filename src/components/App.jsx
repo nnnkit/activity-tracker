@@ -73,7 +73,7 @@ class App extends React.Component {
           Welcome to Activity tracker!
         </h1>
         <div className="level pt-4">
-          <div className="level-left">
+          <div className="level-item">
             <div className="field has-addons">
               <p className="control">
                 <input
