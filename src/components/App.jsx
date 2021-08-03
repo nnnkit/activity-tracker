@@ -52,7 +52,7 @@ class App extends React.Component {
   }
   handleClick(e, index) {
     let activityArray = [...this.state.activities];
-    console.log(activityArray);
+
     if (e.target.name === "delete") {
       activityArray.splice(index, 1);
       this.setState({
@@ -84,7 +84,7 @@ class App extends React.Component {
     return (
       <div className="p-6">
         <h1 className=" has-text-centered title has-text-info">
-          Welcome to Activity tracker!
+          Monthly Activity Tracker!
         </h1>
         <div className="level pt-4">
           <div className="level-item">
