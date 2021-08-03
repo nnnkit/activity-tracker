@@ -1,6 +1,6 @@
 import React from "react";
 import Activity from "./Activity";
-import dayArray from "../data";
+import { emptyMonth, month } from "../data";
 
 class App extends React.Component {
   constructor() {
@@ -15,6 +15,18 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+  }
+
+  componentDidMount() {
+    let activities = JSON.parse(localStorage.getItem("activity-monitor") || "");
+    this.setState({ activities });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem(
+      "activity-monitor",
+      JSON.stringify(this.state.activities)
+    );
   }
   handleToggle(id, name) {
     const activities = JSON.parse(JSON.stringify(this.state.activities));
@@ -54,7 +66,7 @@ class App extends React.Component {
             activities: prevState.activities.concat([
               {
                 name: this.state.inputValue,
-                days: [...dayArray],
+                days: [...emptyMonth],
               },
             ]),
           };
@@ -74,7 +86,7 @@ class App extends React.Component {
         </h1>
         <div className="level pt-4">
           <div className="level-item">
-            <div className="field has-addons">
+            <form className="field has-addons" onSubmit={this.handleClick}>
               <p className="control">
                 <input
                   className="input px-6"
@@ -90,11 +102,12 @@ class App extends React.Component {
                 <button
                   className="button is-primary"
                   onClick={this.handleClick}
+                  type="submit"
                 >
                   Add Activity
                 </button>
               </p>
-            </div>
+            </form>
           </div>
           {/* <div className="level-right">
             <p className="control">
@@ -113,6 +126,7 @@ class App extends React.Component {
               index={index}
               handleToggle={this.handleToggle}
               handleDelete={this.handleClick}
+              month={month}
             />
           );
         })}
