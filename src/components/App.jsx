@@ -18,7 +18,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let activities = JSON.parse(localStorage.getItem("activity-monitor") || "");
+    let activities = localStorage.getItem("activity-monitor")
+      ? JSON.parse(localStorage.getItem("activity-monitor"))
+      : [];
     this.setState({ activities });
   }
 
